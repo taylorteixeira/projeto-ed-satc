@@ -1,0 +1,78 @@
+site_name: Engenharia de Dados SATC
+site_description: Documentacao do projeto <nome do projeto>
+site_author: Jorge Luiz da Silva
+site_url: https://jlsilva01.github.io/projeto-ed-satc
+site_favicon: images/favicon.png
+site_logo: images/logo.png
+site_keywords: Engenharia de Dados, Engenharia de Software, SATC, Python, Pyspark, Delta, Jupyter, Git, GitHub, Markdown, MkDocs, Material Theme
+
+repo_name: projeto-ed-satc
+repo_url: http://github.com/jlsilva01/projeto-ed-satc
+edit_uri: edit/master/docs/
+
+docs_dir: docs
+
+nav:
+  - Home: index.md
+  - Sobre: sobre.md
+
+theme:
+  name: material
+  palette:
+    primary: blue
+    accent: light-blue
+  language: pt
+  features:
+    - navigation.footer
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.path
+    #- navigation.paging
+    #- navigation.expand
+    - navigation.top
+    #- navigation.sidebar
+    - navigation.next-prev
+    #- navigation.toc
+    #- navigation.scrollspy
+    - search
+  icon:
+    repo: fontawesome/brands/github
+
+hide:
+  - search
+  - navigation
+  - toc
+
+extra:
+  social:
+    - icon: fontawesome/brands/mastodon 
+      link: https://jl2tech.com
+  generator: false
+
+copyright: Copyright &copy; 2024 - <a href="#" target="_blank"><b>Jorge Luiz da Silva</b></a> - Todos os direitos reservados.
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+
+markdown_extensions: 
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
