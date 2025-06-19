@@ -2,11 +2,15 @@
 name = "projeto-ed-satc"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Edrik Steiner", "Eduardo Scalco", "Eryc Jacinto", "Igor de Souza", "Taylor Teixeira"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pandas = "^2.3.0"
+pymongo = "^4.13.2"
+azure-storage-file-datalake = "^12.20.0"
+python-dotenv = "^1.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
