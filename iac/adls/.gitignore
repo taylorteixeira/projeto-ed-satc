@@ -1,0 +1,16 @@
+# Arquivo .gitignore para a pasta adls
+
+# Arquivos de variáveis locais com segredos
+terraform.tfvars
+*.auto.tfvars
+
+# Arquivos de estado do Terraform
+terraform.tfstate
+terraform.tfstate.backup
+
+# Arquivos de log de crash
+crash.log
+crash.*.log
+
+# Pasta de plugins do Terraform
+.terraform/
