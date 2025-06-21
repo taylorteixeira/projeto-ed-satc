@@ -1,0 +1,12 @@
+# Arquivo: terraform.tfvars - Versão final com seus dados
+
+# --- Valores personalizados ---
+resource_group_name = "rg-nome-example"
+workspace_name      = "ws-nome-exemple"
+location            = "East US"
+
+# --- Valores que você acabou de gerar ---
+subscription_id     = "d"
+azure_client_id     = ""
+azure_client_secret = ""
+azure_tenant_id     = ""
