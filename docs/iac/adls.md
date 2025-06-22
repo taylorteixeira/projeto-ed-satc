@@ -62,9 +62,9 @@ resource "azurerm_storage_container" "gold" {
 }
 ```
 
-<br>
+\
 ```src/iac/adls/main.tf```
-<br>
+
 
 
 ### `output.tf` - Saídas do Módulo
@@ -95,9 +95,9 @@ output "adls_container_gold" {
   value       = azurerm_storage_container.gold.name
 }
 ```
-<br>
+\
 ```src/iac/adls/output.tf```
-<br>
+
 
 ### `provider.tf` - Configuração do Provedor Azure
 Este arquivo é responsável por configurar o provedor que o Terraform usará para interagir com a infraestrutura cloud. No caso, o provedor `azurerm` é especificado, juntamente com sua versão mínima exigida. A fixação da versão (`version = "3.3.0"`) é uma boa prática para garantir a reprodutibilidade do deploy e evitar que atualizações de provedor com mudanças incompatíveis (breaking changes) afetem inesperadamente sua infraestrutura.
@@ -119,27 +119,29 @@ provider "azurerm" {
   features {}
 }
 ```
-<br>
+\
 ```src/iac/adls/provider.tf```
-<br>
+
 
 ### `variables.tf` - Variáveis de Entrada
-Este arquivo declara as variáveis de entrada que permitem a parametrização do módulo Terraform. A utilização de variáveis é fundamental para tornar o código reutilizável e adaptável a diferentes ambientes ou configurações sem a necessidade de modificar o código-fonte diretamente. Neste caso, são definidas variáveis para o Resource Group e a Localização (região Azure).
+Este arquivo declara as variáveis de entrada que permitem a parametrização do módulo Terraform. A utilização de variáveis é fundamental para tornar o código reutilizável e adaptável a diferentes ambientes ou configurações sem a necessidade de modificar o código-fonte diretamente. As descrições (`description`) são cruciais para a documentação interna e para quem for utilizar o módulo, enquanto os valores `default` são úteis para testes rápidos ou para definir valores comuns.
 
-```markdown
-# Lista de variaveis utilizadas nos arquivos de terraform
+```terraform
+# Define o nome do grupo de recursos como uma variável.
+# Este grupo de recursos deve existir previamente ou ser criado por outro módulo Terraform.
 variable "resource_group_name" {
+  description = "O nome do grupo de recursos onde a Storage Account e os containers serão provisionados."
   type        = string
-  description = "The name of the Azure Resource Group where resources will be deployed."
-  default     = "databricks-rg-eng-dados-i45pzpkirdaeo" # Valor padrão para fins de demonstração
+  default     = "rg-adls-terraform-demo" # Valor padrão para demonstração. Pode ser sobrescrito via CLI ou .tfvars.
 }
 
+# Define a localização (região Azure) como uma variável.
+# É importante que esta localização seja a mesma da Storage Account existente.
 variable "location" {
+  description = "A localização (região Azure) onde os recursos serão criados."
   type        = string
-  description = "The Azure region where resources will be deployed (e.g., 'eastus', 'brazilsouth')."
-  default     = "eastus" # Valor padrão para fins de demonstração
+  default     = "eastus" # Exemplo de região. Escolha uma região Azure que atenda aos seus requisitos de latência e soberania de dados.
 }
 ```
-<br>
+\
 ```src/iac/adls/variables.tf```
-<br>

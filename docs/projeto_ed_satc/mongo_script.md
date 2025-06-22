@@ -2,14 +2,14 @@
 
 # Script ELT: MongoDB para Azure Data Lake Storage
 
-O script `elt_mongodb_n_collections.py` é responsável pela extração de dados de todas as coleções de um banco de dados MongoDB e pelo carregamento desses dados no Azure Data Lake Storage Gen2 (ADLS Gen2) em formato CSV. Ele atua como um componente de ingestão de dados fundamental, garantindo que as informações do MongoDB sejam disponibilizadas no data lake para posterior processamento, análise e consumo por outras ferramentas ou sistemas.
+O script `injector.py` é responsável pela extração de dados de todas as coleções de um banco de dados MongoDB e pelo carregamento desses dados no Azure Data Lake Storage Gen2 (ADLS Gen2) em formato CSV. Ele atua como um componente de ingestão de dados fundamental, garantindo que as informações do MongoDB sejam disponibilizadas no data lake para posterior processamento, análise e consumo por outras ferramentas ou sistemas.
 
 Este script segue uma abordagem ELT (Extract, Load, Transform):
 1.  **Extract (Extração):** Conecta-se ao MongoDB e lê os documentos de cada coleção.
 2.  **Load (Carga):** Carrega os dados brutos (ou minimamente processados) no ADLS Gen2.
 3.  **Transform (Transformação):** Remove o campo `_id` padrão do MongoDB e converte os dados para CSV antes do carregamento. Esta transformação é realizada após a carga inicial dos dados brutos na memória, mas antes da escrita final no destino.
 
-### 📜 Pré-requisitos
+### Pré-requisitos
 
 Para que o script funcione corretamente, as seguintes variáveis de ambiente devem ser configuradas. Recomenda-se a criação de um arquivo `.env` na raiz do projeto (dois níveis acima do script) para gerenciamento seguro e flexível dessas variáveis, evitando hardcoding de credenciais:
 

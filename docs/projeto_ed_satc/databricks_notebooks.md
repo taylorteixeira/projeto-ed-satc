@@ -18,7 +18,7 @@ Nesta camada, os dados são armazenados de forma quase "raw", com poucas ou nenh
 *   **Persistência para Bronze:** Escreve os dados no formato Delta Lake na camada `bronze` do ADLS Gen2. A organização dos dados por tabelas (ex: `/bronze/assistencias`) dentro do Delta Lake permite o uso de recursos como `MERGE INTO` para upserts e `OPTIMIZE` para compactação de arquivos, melhorando a performance de leitura.
 
 \
-`src/iac/databricks/bronze.ipynb`
+`src/projeto_ed_satc/pipeline/bronze.ipynb`
 
 
 ---
@@ -39,7 +39,7 @@ A camada Silver contém dados limpos, consistentes e estruturados, prontos para 
 *   **Persistência para Silver:** Salva os DataFrames processados na camada `silver` do ADLS Gen2 no formato Delta Lake. A estratégia de escrita (ex: `overwrite`, `append`, `merge`) deve ser cuidadosamente escolhida com base na idempotência do processo e na lógica de atualização dos dados. Para tabelas que sofrem alterações incrementais, o `MERGE INTO` é altamente recomendado para upserts eficientes. A otimização com `ZORDER BY` em colunas frequentemente usadas em filtros pode melhorar significativamente a performance de leitura.
 
 \
-`src/iac/databricks/silver.ipynb`
+`src/projeto_ed_satc/pipeline/silver.ipynb`
 
 
 ---
@@ -72,4 +72,4 @@ A camada Gold é otimizada para o consumo, com dados agregados e estruturados em
 *   **Persistência para Gold:** Salva as tabelas dimensionais e de fatos na camada `gold` do ADLS Gen2 e as registra como tabelas Delta no Databricks. É fundamental usar `CREATE OR REPLACE TABLE` para garantir a idempotência do processo e facilitar o reprocessamento. A criação de tabelas Delta gerenciadas ou externas no Databricks permite que elas sejam facilmente descobertas e consultadas via SQL por ferramentas de BI.
 
 \
-`src/iac/databricks/gold.ipynb`
+`src/projeto_ed_satc/pipeline/gold.ipynb`
