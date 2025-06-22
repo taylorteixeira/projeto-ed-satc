@@ -211,4 +211,6 @@ Este projeto está sob a licença MIT - veja o arquivo [LICENSE](https://github.
 ## Referências
 
 - [Template para o Projeto](https://github.com/jlsilva01/projeto-ed-satc) - jlsilva01
-- [alds-azure](<(https://github.com/jlsilva01/adls-azure)>) - jlsilva01
+- [alds-azure](https://github.com/jlsilva01/adls-azure) - jlsilva01
+- [https://tutorial-mkdocs.systemhealthlab.com/flavoured_markdown.html](https://tutorial-mkdocs.systemhealthlab.com/flavoured_markdown.html)  
+- [https://squidfunk.github.io/mkdocs-material/reference/](https://squidfunk.github.io/mkdocs-material/reference/)

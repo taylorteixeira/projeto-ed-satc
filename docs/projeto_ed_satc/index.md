@@ -6,7 +6,7 @@ Aqui você encontrará detalhes sobre os principais componentes de código que i
 
 ---
 
-## ⚡ Script ELT: MongoDB para Azure Data Lake Storage
+## Script ELT: MongoDB para Azure Data Lake Storage
 
 Esta seção documenta o script Python (`injector.py`) responsável pela rotina de Extração, Carga e Transformação (ELT) de dados de um banco de dados MongoDB para o Azure Data Lake Storage Gen2 (ADLS Gen2). Este script é crucial para integrar dados NoSQL, que muitas vezes possuem esquemas flexíveis e aninhados, ao nosso ambiente de Data Lake estruturado, tornando-os acessíveis para análise e processamento subsequente por ferramentas como Databricks ou Power BI.
 
