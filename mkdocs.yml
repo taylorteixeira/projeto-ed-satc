@@ -12,6 +12,7 @@ docs_dir: docs
 nav:
   - Início: index.md
   - Sobre: sobre.md
+  - Modelo Relacional: modelo_relacional.md
   - Infraestrutura como Código (IaC): 
       - Visão Geral: iac/index.md
       - Azure Data Lake Storage (Terraform): iac/adls.md

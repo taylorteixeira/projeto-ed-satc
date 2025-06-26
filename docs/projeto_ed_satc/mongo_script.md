@@ -1,63 +1,182 @@
-
-
 # Script ELT: MongoDB para Azure Data Lake Storage
 
-O script `injector.py` é responsável pela extração de dados de todas as coleções de um banco de dados MongoDB e pelo carregamento desses dados no Azure Data Lake Storage Gen2 (ADLS Gen2) em formato CSV. Ele atua como um componente de ingestão de dados fundamental, garantindo que as informações do MongoDB sejam disponibilizadas no data lake para posterior processamento, análise e consumo por outras ferramentas ou sistemas.
+O arquivo de notebook **injector** é responsável pela extração de dados de coleções em um banco de dados MongoDB e sua posterior carga no **Azure Data Lake Storage Gen2 (ADLS Gen2)** em formato CSV. Este processo segue a abordagem ELT (Extract, Load, Transform), viabilizando a disponibilização de dados estruturados no Data Lake para processamento, análise ou uso por outras ferramentas.
 
-Este script segue uma abordagem ELT (Extract, Load, Transform):
-1.  **Extract (Extração):** Conecta-se ao MongoDB e lê os documentos de cada coleção.
-2.  **Load (Carga):** Carrega os dados brutos (ou minimamente processados) no ADLS Gen2.
-3.  **Transform (Transformação):** Remove o campo `_id` padrão do MongoDB e converte os dados para CSV antes do carregamento. Esta transformação é realizada após a carga inicial dos dados brutos na memória, mas antes da escrita final no destino.
+---
 
-### Pré-requisitos
+## Estrutura ELT Implementada
 
-Para que o script funcione corretamente, as seguintes variáveis de ambiente devem ser configuradas. Recomenda-se a criação de um arquivo `.env` na raiz do projeto (dois níveis acima do script) para gerenciamento seguro e flexível dessas variáveis, evitando hardcoding de credenciais:
+1. **Extract (Extração):**
+   - Estabelece conexão com o MongoDB.
+   - Obtém documentos de todas as coleções disponíveis em um banco de dados específico.
 
-*   `MONGODB_URI`: URI de conexão com o MongoDB. Exemplos incluem:
-    *   `mongodb://user:password@host:port/` para uma instância standalone.
-    *   `mongodb+srv://user:password@cluster.mongodb.net/` para clusters MongoDB Atlas (SRV record).
-    *   Certifique-se de que o usuário tem permissões de leitura para o banco de dados e coleções desejadas.
-*   `MONGODB_DATABASE`: Nome do banco de dados MongoDB a ser processado.
-*   `ADLS_ACCOUNT_NAME`: Nome da sua Storage Account do Azure Data Lake Storage Gen2 (ex: `mystorageaccount`).
-*   `ADLS_FILE_SYSTEM_NAME`: Nome do File System (container) no ADLS Gen2 onde os dados serão carregados (ex: `raw-data`).
-*   `ADLS_DIRECTORY_NAME`: O nome do diretório base dentro do File System onde os dados serão armazenados (ex: `mongodb_ingestion`).
-*   `ADLS_SAS_TOKEN`: Token de Assinatura de Acesso Compartilhado (SAS) para o ADLS Gen2. Este token deve ter, no mínimo, permissões de `Write` e `Create` para o container e diretórios onde os dados serão salvos. Para ambientes de produção, é altamente recomendável usar Managed Identities ou Service Principals com RBAC do Azure para autenticação, em vez de SAS tokens, para maior segurança e gerenciamento centralizado.
+2. **Load (Carga):**
+   - Os documentos são carregados no ADLS Gen2 em formato CSV.
+   - Cada coleção é salva como um arquivo `.csv` em um diretório com timestamp para rastreabilidade.
 
-Além disso, as seguintes bibliotecas Python devem ser instaladas:
-*   `pymongo`: Driver oficial do MongoDB para Python.
-*   `pandas`: Biblioteca para manipulação e análise de dados, usada para estruturar os documentos em DataFrames.
-*   `azure-storage-file-datalake`: SDK do Azure para interagir com o ADLS Gen2.
-*   `python-dotenv`: Facilita o carregamento de variáveis de ambiente de um arquivo `.env`.
+3. **Transform (Transformação):**
+   - O campo `_id` (identificador padrão do MongoDB) é removido.
+   - Os dados são transformados para um formato amigável (CSV) para interoperabilidade com outras ferramentas.
 
-### Detalhamento do Código
+---
 
-O script é dividido em seções lógicas para:
+## Pré-Requisitos
 
-#### 1. Configuração de Logging e Carregamento de Variáveis de Ambiente
+1. **Configuração de Widgets no Databricks:**
+### - Utiliza **widgets** para capturar informações configuráveis necessárias durante a execução. Eles incluem:
 
-O script configura um sistema de logging robusto para acompanhar o progresso da execução, registrar eventos importantes e diagnosticar possíveis erros. Ele tenta carregar as variáveis de ambiente a partir de um arquivo `.env` localizado na raiz do projeto, tornando a configuração flexível e segura, evitando hardcoding de credenciais sensíveis. Caso o `.env` não seja encontrado, ele tenta carregar variáveis já definidas no ambiente do sistema.
+| - **Banco de dados MongoDB:** Nome do banco de dados a ser processado. |
+|---|
 
 
-#### 2. Conexão ao MongoDB
+     - **Descrição da conta no ADLS Gen2:** Nome da conta de armazenamento, sistema de arquivos e diretório destino.
+     - **Credenciais de autenticação:** String de conexão com o MongoDB e token SAS para o ADLS.
 
-Utiliza a biblioteca `pymongo` para estabelecer uma conexão com o servidor MongoDB. Inclui uma validação de conexão (`client.admin.command('ping')`) para garantir que o banco de dados está acessível e que as credenciais estão corretas antes de prosseguir com a leitura dos dados. O `ServerApi("1")` é usado para garantir a compatibilidade com a API de versão 1 do MongoDB, o que ajuda a prevenir problemas de compatibilidade futura.
+2. **Bibliotecas Necessárias:**
+### O script exige as seguintes bibliotecas Python, instaladas previamente no ambiente:
+
+| - **pymongo:** Para conexão e manipulação do MongoDB. |
+|---|
 
 
-#### 3. Conexão ao Azure Data Lake Storage (ADLS Gen2)
+   - **azure-storage-file-datalake:** Para interação com o Azure Data Lake.
+   - **pandas:** Para processamento e estruturação dos dados.
+   - Comando utilizado no notebook para instalar essas bibliotecas:
+     ```python
+     %pip install pymongo azure-storage-file-datalake pandas
+     ```
 
-Conecta-se ao ADLS Gen2 usando o token SAS para autenticação. Ele obtém um cliente para o sistema de arquivos especificado e cria um diretório com timestamp (`YYYYMMDD_HHMMSS`) dentro do `ADLS_DIRECTORY_NAME` configurado. Esta estratégia de timestamp é crucial para evitar sobrescrever dados de execuções anteriores, facilitando a rastreabilidade temporal e a recuperação de dados, além de permitir o processamento incremental ou histórico.
+3. **Credenciais Necessárias:**
+   - **MongoDB URI:** String de conexão para acesso ao banco de dados.
+   - **Token SAS do Azure Data Lake:** Especifica permissões de acesso (leitura e escrita) ao container/diretório.
+
+---
+
+## Detalhamento do Código
+
+### 1. Configuração
+
+O script inicializa capturando os parâmetros configuráveis via **widgets**. Esses parâmetros permitem a flexibilidade de ajustar o comportamento do script sem alteração no código.
+
+**Exemplo de widgets utilizados:**
+```python
+dbutils.widgets.text("mongodb_database", "projetoaws", "2. Nome do Banco de Dados MongoDB")
+dbutils.widgets.text("adls_account_name", "datalakef77be278f4c3d227", "3. Nome da Conta de Storage (ADLS)")
+dbutils.widgets.text("adls_file_system_name", "landing-zone", "4. Nome do File System (Contêiner)")
+dbutils.widgets.text("adls_directory_name", "dados", "5. Diretório Base de Destino no ADLS")
+dbutils.widgets.text("mongo_uri", "mongodb+srv://root:senha@cluster...", "6. Nome da Chave do Segredo (MongoDB URI)")
+dbutils.widgets.text("sas_token", "token_sas_gerado...", "7. Nome da Chave do Segredo (ADLS SAS Token)")
+```
+
+### 2. Conexão com o MongoDB
+
+### A conexão com o MongoDB é estabelecida utilizando a biblioteca `pymongo`. O script:
+
+| - Verifica a acessibilidade do banco de dados utilizando o comando `ping`. |
+|---|
 
 
-#### 4. Processamento e Carga de Coleções
+- Obtém uma lista de coleções disponíveis para processamento.
 
-O script itera sobre cada coleção encontrada no banco de dados MongoDB. Para cada coleção:
-*   Lê todos os documentos usando `collection.find({})` e os carrega em um DataFrame do Pandas. Para coleções muito grandes, esta abordagem pode consumir muita memória; uma estratégia de paginação ou processamento em lotes seria mais eficiente.
-*   Remove o campo `_id` (gerado automaticamente pelo MongoDB como um `ObjectId` BSON) do DataFrame. Este campo é primário no MongoDB, mas geralmente não é útil ou pode causar problemas de tipo de dados em formatos tabulares como CSV ou em sistemas de destino que esperam chaves primárias numéricas ou de string simples.
-*   Verifica se o DataFrame resultante contém dados antes de prosseguir.
-*   Converte o DataFrame para o formato CSV, garantindo que o índice do DataFrame não seja incluído (`index=False`) e codificando para UTF-8 para compatibilidade universal de caracteres.
-*   Carrega o CSV resultante para o diretório timestamped no ADLS Gen2, nomeando o arquivo com o nome da coleção (`{collection_name}.csv`). A opção `overwrite=True` garante que, se por algum motivo o arquivo já existir (o que é improvável com o timestamp no diretório), ele será substituído.
+**Validação:**
+- Caso nenhuma coleção seja encontrada, o script encerra com uma mensagem apropriada.
 
-#### 5. Tratamento de Erros e Finalização
+**Trecho de exemplo:**
+```python
+from pymongo import MongoClient
+from pymongo.server_api import ServerApi
 
-O script utiliza blocos `try-except` aninhados e abrangentes para capturar e registrar erros em diferentes estágios: conexão com MongoDB, conexão com ADLS, autenticação e erros durante o processamento de coleções individuais. Isso garante que a execução seja robusta, que problemas sejam devidamente notificados via logs e que o script encerre com um código de saída apropriado (`sys.exit(0)` para sucesso, `sys.exit(1)` para falha). A conexão com o MongoDB é fechada no bloco `finally`, assegurando a liberação de recursos.
+mongo_client = MongoClient(mongo_uri, server_api=ServerApi("1"), serverSelectionTimeoutMS=5000)
+mongo_client.admin.command('ping')
+db = mongo_client[mongodb_database]
+collections = db.list_collection_names()
+```
 
+### 3. Conexão ao ADLS Gen2
+
+O script conecta-se ao Azure Data Lake utilizando `azure-storage-file-datalake`. Um diretório com timestamp é criado no container especificado para evitar sobreposição de dados de execuções anteriores.
+
+**Processo:**
+- Um **DataLakeServiceClient** é instanciado com a URL da conta e o token SAS.
+- Verificações são realizadas para garantir que o *file system* e o diretório estão devidamente configurados.
+
+**Trecho de exemplo:**
+```python
+from azure.storage.filedatalake import DataLakeServiceClient
+from datetime import datetime
+
+service_client = DataLakeServiceClient(
+    account_url=f"https://{adls_account_name}.dfs.core.windows.net",
+    credential=sas_token
+)
+file_system_client = service_client.get_file_system_client(file_system_name)
+directory_path = f"{directory_name}/{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+directory_client = file_system_client.get_directory_client(directory_path)
+directory_client.create_directory()
+```
+
+### 4. Processamento de Dados e Upload para o ADLS
+
+### Cada coleção do MongoDB é processada individualmente:
+
+| 1. Dados são extraídos da coleção e carregados em um `DataFrame` do Pandas. |
+|---|
+
+
+2. O campo `_id` é removido para evitar problemas de compatibilidade.
+3. O DataFrame é convertido em arquivo CSV.
+4. O arquivo CSV é carregado no diretório configurado.
+
+**Trecho de exemplo:**
+```python
+for collection_name in collections:
+    cursor = collection.find({})
+    df = pd.DataFrame(list(cursor))
+    if '_id' in df.columns:
+        df = df.drop('_id', axis=1)
+    csv_data = df.to_csv(index=False, encoding='utf-8')
+    file_client = directory_client.get_file_client(f"{collection_name}.csv")
+    file_client.upload_data(csv_data.encode('utf-8'), overwrite=True)
+```
+
+### 5. Tratamento de Erros
+
+### O script utiliza blocos `try-except` para capturar erros em diferentes estágios:
+
+| - Conexão ao MongoDB e autenticação. |
+|---|
+
+
+- Acesso ao Azure Data Lake.
+- Erros durante o processamento de coleções.
+
+Se um erro crítico ocorrer, a execução é encerrada com uma mensagem de erro apropriada.
+
+**Tratamento de erro para conexão MongoDB:**
+```python
+except ConnectionFailure as e:
+    dbutils.notebook.exit(f"FALHA CRÍTICA: Não foi possível conectar ao MongoDB: {e}")
+```
+
+---
+
+## Resumo da Operação
+
+### Ao final da execução, o script exibe um resumo com:
+
+| - Número de coleções processadas com sucesso. |
+|---|
+
+
+- Número de coleções com falha.
+
+**Trecho de saída esperada:**
+```
+--- Resumo da Operação ---
+Migração concluída.
+Coleções migradas com sucesso: 3
+Coleções com falha: 1
+```
+
+\
+`src/projeto_ed_satc/pipeline/injector/injector.ipynb`
