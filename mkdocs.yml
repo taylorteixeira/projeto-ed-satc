@@ -11,6 +11,7 @@ docs_dir: docs
 
 nav:
   - Início: index.md
+  - Dashboard: dashboard.md
   - Modelo Relacional: modelo_relacional.md
   - Infraestrutura como Código (IaC): 
       - Visão Geral: iac/index.md

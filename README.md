@@ -1,7 +1,7 @@
 # Projeto Engenharia de Dado UNISATC
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen.svg)](https://github.com/taylorteixeira/projeto-ed-satc)  
-[![Docs](https://img.shields.io/badge/docs-mkdocs-blue)](https://jlsilva01.github.io/projeto-ed-satc/)
+[![Docs](https://img.shields.io/badge/docs-mkdocs-blue)](https://taylorteixeira.github.io/projeto-ed-satc/)
 
 Repositorio para desenvolvimento do projeto final da disciplina de Engenharia de Dados do curso de Engenharia de Software da UNISATC.
 
