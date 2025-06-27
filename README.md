@@ -144,7 +144,7 @@ terraform destroy
 
 2. Rode o pipeline de ETL que configura o banco de dados MongoDB:
    ```bash
-   poetry run python iac/mongo/injector.ipynb
+   iac/mongo/injector.ipynb
    ```
 
 ---
@@ -154,7 +154,7 @@ terraform destroy
 1. Suba os notebooks localizados na pasta:
 
    ```
-   iac/databriks
+   iac/databricks
    ```
 
 2. Configure e execute os notebooks diretamente no **Databricks**, conectando ao pipeline e verificando os dados processados.

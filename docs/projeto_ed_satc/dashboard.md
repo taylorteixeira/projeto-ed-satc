@@ -84,6 +84,6 @@ As visualizações mencionadas acima são derivadas de **views** SQL criadas na 
 
 ### 6. **`gold.metrica_minutos_assistidos`:**
 
-- **Descrição** Mede o total de minutos assistidos por mês.
+- **Descrição:** Mede o total de minutos assistidos por mês.
 
 ---
