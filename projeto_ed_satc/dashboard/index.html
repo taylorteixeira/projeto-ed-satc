@@ -15,6 +15,10 @@
         <link rel="canonical" href="https://taylorteixeira.github.io/projeto-ed-satc/projeto_ed_satc/dashboard/">
       
       
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../../modelo_relacional/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +26,7 @@
     
     
       
-        <title>Dashboard e KPIs do Projeto - Engenharia de Dados SATC</title>
+        <title>Dashboard - Engenharia de Dados SATC</title>
       
     
     
@@ -110,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Dashboard e KPIs do Projeto
+              Dashboard
             
           </span>
         </div>
@@ -206,9 +210,11 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="../../dashboard.md" class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
         
   
   
@@ -357,10 +363,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../dashboard.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Dashboard
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -371,6 +399,146 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-do-dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estrutura do Dashboard
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estrutura do Dashboard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-media-de-minutos-assistidos-por-pais-e-plano" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Média de Minutos Assistidos por País e Plano
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-variacao-da-taxa-de-cancelamento-ao-longo-do-tempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Variação da Taxa de Cancelamento ao Longo do Tempo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-correlacao-entre-media-de-minutos-assistidos-e-taxa-de-cancelamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Correlação entre Média de Minutos Assistidos e Taxa de Cancelamento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-taxa-de-cancelamento-por-pais" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Taxa de Cancelamento por País
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kpis-e-metricas-no-databricks" class="md-nav__link">
+    <span class="md-ellipsis">
+      KPIs e Métricas no Databricks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="KPIs e Métricas no Databricks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-view-goldkpi_mrr" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. View: gold.kpi_mrr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-view-goldkpi_churn_rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. View: gold.kpi_churn_rate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-view-goldkpi_engajamento_pais_plano" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. View: gold.kpi_engajamento_pais_plano
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-goldkpi_ltv" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. gold.kpi_ltv:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-goldmetrica_novos_usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. gold.metrica_novos_usuarios:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-goldmetrica_minutos_assistidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. gold.metrica_minutos_assistidos:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -870,7 +1038,7 @@
 <hr />
 <h3 id="6-goldmetrica_minutos_assistidos">6. <strong><code>gold.metrica_minutos_assistidos</code>:</strong><a class="headerlink" href="#6-goldmetrica_minutos_assistidos" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Descrição</strong> Mede o total de minutos assistidos por mês.</li>
+<li><strong>Descrição:</strong> Mede o total de minutos assistidos por mês.</li>
 </ul>
 <hr />
 
@@ -903,6 +1071,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
+        
+          
+          <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Anterior: Início">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Início
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../modelo_relacional/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Modelo Relacional">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Próximo
+              </span>
+              <div class="md-ellipsis">
+                Modelo Relacional
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
