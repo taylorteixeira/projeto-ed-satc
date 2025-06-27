@@ -1,4 +1,4 @@
-# Título do projeto
+# Projeto Engenharia de Dado UNISATC
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen.svg)](https://github.com/taylorteixeira/projeto-ed-satc)  
 [![Docs](https://img.shields.io/badge/docs-mkdocs-blue)](https://jlsilva01.github.io/projeto-ed-satc/)
@@ -9,7 +9,7 @@ Repositorio para desenvolvimento do projeto final da disciplina de Engenharia de
 
 Coloque uma imagem do seu projeto, como no exemplo abaixo:
 
-![image](https://github.com/jlsilva01/projeto-ed-satc/assets/484662/541de6ab-03fa-49b3-a29f-dec8857360c1)
+![image](https://github.com/taylorteixeira/projeto-ed-satc/assets/484662/541de6ab-03fa-49b3-a29f-dec8857360c1)
 
 ## Pré-requisitos e ferramentas utilizadas
 
@@ -144,7 +144,7 @@ terraform destroy
 
 2. Rode o pipeline de ETL que configura o banco de dados MongoDB:
    ```bash
-   poetry run python iac/mongo/elt_mongodb_n_collections.py
+   poetry run python iac/mongo/injector.ipynb
    ```
 
 ---
@@ -161,20 +161,9 @@ terraform destroy
 
 ## Documentação (MkDocs)
 
-Toda a documentação está em `docs/`:
-
-```bash
-uv run mkdocs build
-uv run mkdocs serve
-```
-
+Toda a documentação está em `docs/`: <br>
 Acesse o site em `http://127.0.0.1:8000`.
 
-Para publicar o site estático:
-
-```bash
-uv run mkdocs gh-deploy
-```
 
 ## Colaboração
 
@@ -189,18 +178,15 @@ uv run mkdocs gh-deploy
 4. Envie um **pull request** para `main`.
 5. Aguarde revisão e merge.
 
-## Versão
-
-Fale sobre a versão e o controle de versões para o projeto.
 
 ## Autores
 
 Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 
-- **Taylor Teixeira** - _Função_ - [https://github.com/taylorteixeira](https://github.com/taylorteixeira)
-- **Eduardo Ribarski** - _Função_ - [https://github.com/ribarski](https://github.com/ribarski)
-- **Eryc Jacinto** - _Função_ - [https://github.com/ErycMJ](https://github.com/ErycMJ)
-- **Edrik Steiner** - _Função_ - [https://github.com/edrikfsteiner](https://github.com/edrikfsteiner)
+- **Taylor Teixeira** - _dados e população_ - [https://github.com/taylorteixeira](https://github.com/taylorteixeira)
+- **Eduardo Ribarski** - _Orquestração e pipeline_ - [https://github.com/ribarski](https://github.com/ribarski)
+- **Eryc Jacinto** - _Infraestrutura e banco_ - [https://github.com/ErycMJ](https://github.com/ErycMJ)
+- **Edrik Steiner** - _Injeção e limpeza_ - [https://github.com/edrikfsteiner](https://github.com/edrikfsteiner)
 - **Igor Steiner** - _Documentação_ - [https://github.com/IgorSteinerS](https://github.com/IgorSteinerS)
 
 ## Licença
