@@ -1,6 +1,6 @@
 ﻿## Projeto de criacao de plataforma Databricks Enterprise na Azure com terraform
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Logo da Databricks](https://img.shields.io/badge/License-MIT-blue.svg)](https://www.databricks.com)
 
 Projeto exemplo de criacao de um azure databricks via terraform
 
@@ -73,4 +73,4 @@ password            = "sua_senha_forte"
 
 ## Licença
 
-Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE](LICENSE) para detalhes.
+Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE](https://www.databricks.com) para detalhes.
