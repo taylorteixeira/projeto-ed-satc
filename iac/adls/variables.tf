@@ -1,6 +1,6 @@
 # Define o nome do grupo de recursos como uma variável
 variable "resource_group_name" {
-  description = "O nome do grupo de recursos."
+  description = "eng-dados-final"
   type        = string
   default     = "rg-adls-terraform-demo"
 }
@@ -9,5 +9,5 @@ variable "resource_group_name" {
 variable "location" {
   description = "A localização onde os recursos serão criados."
   type        = string
-  default     = "eastus"
+  default     = "brazilsouth"
 }
