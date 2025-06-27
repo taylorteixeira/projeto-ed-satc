@@ -162,7 +162,7 @@ terraform destroy
 ## Documentação (MkDocs)
 
 Toda a documentação está em `docs/`: <br>
-Acesse o site em `http://127.0.0.1:8000`.
+Acesse o site em `https://taylorteixeira.github.io/projeto-ed-satc`.
 
 
 ## Colaboração
