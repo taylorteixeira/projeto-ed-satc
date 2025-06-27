@@ -1,8 +1,13 @@
-# Lista de variaveis utilizadas nos arquivos de terraform
+# Define o nome do grupo de recursos como uma variável
 variable "resource_group_name" {
-  default = "learn-d7beb5bd-e1c5-4b5c-942e-5946e0ca0099"
+  description = "O nome do grupo de recursos."
+  type        = string
+  default     = "rg-adls-terraform-demo"
 }
 
+# Define a localização como uma variável
 variable "location" {
-  default = "westus"
+  description = "A localização onde os recursos serão criados."
+  type        = string
+  default     = "eastus"
 }

@@ -1,3 +1,9 @@
+# Este bloco instrui o Terraform a CRIAR o grupo de recursos
+resource "azurerm_resource_group" "rg" {
+  name     = var.resource_group_name
+  location = var.location
+}
+
 resource "random_id" "storage_account_name_unique" {
   byte_length = 8
 }
@@ -26,27 +32,26 @@ resource "azurerm_storage_account" "storage" {
 
 # Criar quatro containers dentro do Azure Data Lake Storage Gen2: Landing-zone, Bronze, Silver e Gold
 resource "azurerm_storage_container" "landing-zone" {
-  name                  = "landing-zone"
-  storage_account_name  = azurerm_storage_account.storage.name
-  container_access_type = "private"
+  name                   = "landing-zone"
+  storage_account_name   = azurerm_storage_account.storage.name
+  container_access_type  = "private"
 }
 
 
 resource "azurerm_storage_container" "bronze" {
-  name                  = "bronze"
-  storage_account_name  = azurerm_storage_account.storage.name
-  container_access_type = "private"
+  name                   = "bronze"
+  storage_account_name   = azurerm_storage_account.storage.name
+  container_access_type  = "private"
 }
 
 resource "azurerm_storage_container" "silver" {
-  name                  = "silver"
-  storage_account_name  = azurerm_storage_account.storage.name
-  container_access_type = "private"
+  name                   = "silver"
+  storage_account_name   = azurerm_storage_account.storage.name
+  container_access_type  = "private"
 }
 
 resource "azurerm_storage_container" "gold" {
-  name                  = "gold"
-  storage_account_name  = azurerm_storage_account.storage.name
-  container_access_type = "private"
+  name                   = "gold"
+  storage_account_name   = azurerm_storage_account.storage.name
+  container_access_type  = "private"
 }
-
