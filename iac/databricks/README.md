@@ -21,6 +21,7 @@ az account set --subscription "Nome ou ID da Subscription" (opcional)
 #### 4. Criar a service principal na sua assinatura atual.
 ```bash
 az ad sp create-for-rbac --name "terraform-databricks-sp" --role Contributor --scopes /subscriptions/numero_da_sua_subscription
+
 ```
 #### O resultado da execução do comando acima, será o JSON que segue abaixo.
 

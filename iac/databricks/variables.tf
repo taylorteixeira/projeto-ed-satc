@@ -6,7 +6,7 @@ variable "resource_group_name" {
 variable "location" {
   description = "Localização do Databricks"
   type        = string
-  default     = "East US"
+  default     = "brazilsouth"
 }
 
 variable "workspace_name" {
