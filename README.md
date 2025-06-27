@@ -181,8 +181,6 @@ Acesse o site em `https://taylorteixeira.github.io/projeto-ed-satc`.
 
 ## Autores
 
-Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
-
 - **Taylor Teixeira** - _dados e população_ - [https://github.com/taylorteixeira](https://github.com/taylorteixeira)
 - **Eduardo Ribarski** - _Orquestração e pipeline_ - [https://github.com/ribarski](https://github.com/ribarski)
 - **Eryc Jacinto** - _Infraestrutura e banco_ - [https://github.com/ErycMJ](https://github.com/ErycMJ)
