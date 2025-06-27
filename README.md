@@ -9,7 +9,7 @@ Repositorio para desenvolvimento do projeto final da disciplina de Engenharia de
 
 Coloque uma imagem do seu projeto, como no exemplo abaixo:
 
-![image](assets\arquitetura.png)
+![image](/assets/arquitetura.png)
 
 ## Pré-requisitos e ferramentas utilizadas
 
